@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brokenBlock: {fileID: 0}
   isSolidBlock: 0
-  blockHitValue: 2
+  blockHitValue: 1
   scoreValue: 20
 --- !u!212 &212091434189464204
 SpriteRenderer:

@@ -11,37 +11,46 @@ public class BallMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float increaseSpeedValue;
+    [SerializeField] private Transform playerPoint;
+
     private GameController gameController;
+
+    private bool canMove = true;
 
     // Use this for initialization
     void Start()
     {
-        transform.eulerAngles = new Vector3(0f, 0f, Random.Range(minRandomAngle, maxRandomAngle));
+        if (gameObject.tag == "Ball")
+            transform.eulerAngles = new Vector3(0f, 0f, Random.Range(minRandomAngle, maxRandomAngle));
         gameController = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameController.isGameStart)
+        if (gameController.isGameStart && canMove)
             transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
+        if (!canMove)
+            transform.position = playerPoint.transform.position;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "DeathWall")
         {
-            Debug.Log("Bye ball");
+            if (gameObject.tag == "HelpBall")
+            {
+                Destroy(gameObject);
+                return;
+            }
             gameController.DecLives();
         }
         if (collision.gameObject.tag == "Corner")
         {
-            Debug.Log("Hi, Corner");
             MakeBounce(collision, 0.7f);
         }
         if (collision.gameObject.tag == "Block")
         {
-            Debug.Log("Hi, Block");
             moveSpeed += increaseSpeedValue;
             collision.gameObject.GetComponent<BlockController>().BlockHit();
         }
@@ -67,5 +76,18 @@ public class BallMovement : MonoBehaviour
             moveSpeed *= speedMultiply;
         else
             moveSpeed /= speedMultiply;
+    }
+
+    public void ResetPosition(float time)
+    {
+        StartCoroutine(MoveDaley(time));
+    }
+
+    private IEnumerator MoveDaley(float time)
+    {
+        canMove = false;
+        transform.eulerAngles = new Vector3(0f, 0f, Random.Range(minRandomAngle, maxRandomAngle));
+        yield return new WaitForSeconds(time);
+        canMove = true;
     }
 }

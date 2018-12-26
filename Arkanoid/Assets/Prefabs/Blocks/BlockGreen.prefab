@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84852748feffdc041bf1776e1001a42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brokenBlock: {fileID: 21300000, guid: bcc844cd652df8b49b92e01f6292bb8b, type: 3}
-  isSolidBlock: 1
-  blockHitValue: 2
+  brokenBlock: {fileID: 0}
+  isSolidBlock: 0
+  blockHitValue: 1
   scoreValue: 10
 --- !u!212 &212305368292841806
 SpriteRenderer:

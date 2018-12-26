@@ -16,6 +16,7 @@ public class PowerUpController : MonoBehaviour
         ChangePlayerSizePowerUp = GetComponentInChildren<ChangePlayerSizePowerUp>();
         MakeTripleBallsPowerUp = GetComponentInChildren<MakeTripleBallsPowerUp>();
         PlayerController = FindObjectOfType<PlayerController>();
+        Ball = FindObjectOfType<BallMovement>();
     }
 
     public void SpawnPowerUp(Transform spawnPosition)
@@ -43,4 +44,5 @@ public class PowerUpController : MonoBehaviour
     public MakeTripleBallsPowerUp MakeTripleBallsPowerUp { get; set; }
     public GameController GameController { get; private set; }
     public PlayerController PlayerController { get; private set; }
+    public BallMovement Ball { get; private set; }
 }

@@ -61,7 +61,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58952063947488546
 CircleCollider2D:
@@ -93,6 +93,7 @@ MonoBehaviour:
   maxRandomAngle: 45
   moveSpeed: 5
   increaseSpeedValue: 0.15
+  playerPoint: {fileID: 0}
 --- !u!212 &212431688447054592
 SpriteRenderer:
   m_ObjectHideFlags: 1
