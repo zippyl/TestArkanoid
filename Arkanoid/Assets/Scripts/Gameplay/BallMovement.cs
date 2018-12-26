@@ -47,7 +47,9 @@ public class BallMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "Corner")
         {
-            MakeBounce(collision, 0.7f);
+            Debug.Log("Hit corner");
+            MakeBounce(collision, 1.1f);
+            return;
         }
         if (collision.gameObject.tag == "Block")
         {
@@ -60,14 +62,14 @@ public class BallMovement : MonoBehaviour
     private void MakeBounce(Collision2D collision, float normalMultiply = 1f)
     {
         var curDir = transform.TransformDirection(Vector3.up);
-        var newPos = CalculateAngle(curDir, collision.contacts[0].normal * normalMultiply);
+        var newPos = CalculateAngle(curDir, collision.contacts[0].normal, normalMultiply);
         var newRot = Quaternion.FromToRotation(Vector3.up, newPos);
         transform.rotation = newRot;
     }
 
-    private Vector3 CalculateAngle(Vector2 vector, Vector2 normal)
+    private Vector3 CalculateAngle(Vector2 vector, Vector2 normal, float normalMultiply = 1f)
     {
-        return vector - (2 * normal * Vector2.Dot(vector, normal));
+        return vector - (2 * normal * normalMultiply * Vector2.Dot(vector, normal));
     }
 
     public void ChangeSpeed(bool canMultiply, float speedMultiply)
